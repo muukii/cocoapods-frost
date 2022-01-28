@@ -10,7 +10,7 @@
       "request": "launch",
       "program": "${workspaceRoot}/local_pod.rb",
       "args": [
-         
+         "frost"
         ],
       "useBundler": true
       // "preLaunchTask": "clean"
