@@ -1,16 +1,24 @@
 PODS:
   - JAYSON (2.4.0)
+  - Verge (8.15.1):
+    - Verge/Store (= 8.15.1)
+  - Verge/ObjcBridge (8.15.1)
+  - Verge/Store (8.15.1):
+    - Verge/ObjcBridge
 
 DEPENDENCIES:
   - JAYSON
+  - Verge
 
 SPEC REPOS:
   trunk:
     - JAYSON
+    - Verge
 
 SPEC CHECKSUMS:
   JAYSON: 0d22863627eb0637f5b1c50c1e15ee78949f7088
+  Verge: 0086358d5865350b25e3939c9b6e66c05c3f3701
 
-PODFILE CHECKSUM: c0ad6b9df834f2db6581b1ba861f15e382ebe705
+PODFILE CHECKSUM: 4ab208015e52f8e3146e9d87ee2b7762f82553e0
 
 COCOAPODS: 1.11.2

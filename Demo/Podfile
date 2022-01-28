@@ -1,8 +1,19 @@
-#install! 'cocoapods', integrate_targets: false
 
 use_frameworks!
 platform :ios, '12.0'
 
-abstract_target 'Demo' do
+target 'Demo' do
   pod "JAYSON"
+  pod "Verge"
+  pod "Brightroom"
+end
+
+pre_install do |installer|
+  # p "hoge"
+  # installer.generated_projects.each do |project|
+  #   puts "hhh"
+  #   project.targets.each do |target|
+  #     config.build_settings['SWIFT_VERSION'] = '5.5'
+  #   end  
+  # end
 end

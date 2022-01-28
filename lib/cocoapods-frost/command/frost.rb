@@ -29,14 +29,21 @@ module Pod
         # podfile = Pod::Podfile.new(File.join(config.sandbox_root, "../Podfile"))
         podfile = Pod::Podfile.from_file(File.join(config.sandbox_root, "../Podfile"))
 
+        # analyzer = Pod::Installer::Analyzer.new(sandbox, podfile)
+        # p analyzer.analyze
+
         installer = Installer.new(sandbox, podfile)
 
         installer.repo_update = false
         installer.podfile.installation_options.integrate_targets = false
         installer.podfile.installation_options.warn_for_multiple_pod_sources = false
         installer.podfile.installation_options.deterministic_uuids = false
+        installer.podfile.installation_options.generate_multiple_pod_projects = false
+        installer.podfile.installation_options.incremental_installation = false
 
         installer.install!
+
+        p installer
       end
 
     end
