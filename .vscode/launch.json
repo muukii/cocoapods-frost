@@ -12,7 +12,8 @@
       "args": [
          "frost"
         ],
-      "useBundler": true
+      "useBundler": true,
+      "cwd": "${workspaceRoot}/Demo"
       // "preLaunchTask": "clean"
     }
   ]
