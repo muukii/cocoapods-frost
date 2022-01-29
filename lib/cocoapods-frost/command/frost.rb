@@ -59,18 +59,20 @@ module Pod
 
           puts "📦 Build #{target.name}"
 
+          p target.root_spec.attributes_hash
+
           # p CocoapodsFrost.xcodebuild
 
           configuration = "Release"
 
-          CocoapodsFrost.create_xcframewrok(
+          xcframework_path = CocoapodsFrost.create_xcframewrok(
             output_directory: working_directory.join("./out"),
             build_directory: working_directory.join("./build"),
             module_name: target.product_module_name,
             project_name: sandbox.project_path.realdirpath,
             scheme: target.label,
             configuration: configuration
-          )
+          )        
 
         end
 

@@ -3,9 +3,37 @@ use_frameworks!
 platform :ios, '12.0'
 
 target 'Demo' do
+
   pod "JAYSON"
   pod "Verge"
   pod "Brightroom"
+
+  pod "FBSDKCoreKit"
+  pod "FBSDKLoginKit"
+  pod "Texture/Core"
+  pod "Texture/Video"
+  pod "SSZipArchive"
+
+  pod "Firebase/Core"
+  pod "Firebase/Performance"
+  pod "Firebase/Messaging"
+  pod "Firebase/InAppMessaging"
+  pod "Firebase/Auth"
+  pod "FirebaseUI/Phone"
+  pod "FirebaseUI/OAuth"
+  pod "Firebase/Crashlytics"
+  pod "Firebase/Analytics"
+  pod "Moya"  
+  pod "SwiftDate"
+  pod "RxSwift"
+  pod "RxCocoa"
+  pod "RxRelay"
+  pod "RxFuture"
+
+  pod "gRPC-Swift", ">=1.4.2"
+  pod "lottie-ios"
+  pod "MagazineLayout"
+  pod "SVGKit"
 end
 
 pre_install do |installer|
