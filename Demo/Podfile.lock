@@ -1,5 +1,20 @@
 PODS:
+  - Brightroom (2.5.0):
+    - Brightroom/Engine (= 2.5.0)
+    - Brightroom/UI-Classic (= 2.5.0)
+    - Brightroom/UI-Crop (= 2.5.0)
+    - Verge/Store (>= 8.9.1)
+  - Brightroom/Engine (2.5.0):
+    - Verge/Store (>= 8.9.1)
+  - Brightroom/UI-Classic (2.5.0):
+    - Brightroom/Engine
+    - TransitionPatch
+    - Verge/Store (>= 8.9.1)
+  - Brightroom/UI-Crop (2.5.0):
+    - Brightroom/Engine
+    - Verge/Store (>= 8.9.1)
   - JAYSON (2.4.0)
+  - TransitionPatch (1.0.5)
   - Verge (8.15.1):
     - Verge/Store (= 8.15.1)
   - Verge/ObjcBridge (8.15.1)
@@ -7,18 +22,23 @@ PODS:
     - Verge/ObjcBridge
 
 DEPENDENCIES:
+  - Brightroom
   - JAYSON
   - Verge
 
 SPEC REPOS:
   trunk:
+    - Brightroom
     - JAYSON
+    - TransitionPatch
     - Verge
 
 SPEC CHECKSUMS:
+  Brightroom: 95620f8638003371c3e1c0606ffdb242514f7dcb
   JAYSON: 0d22863627eb0637f5b1c50c1e15ee78949f7088
+  TransitionPatch: e401775146cbe326605b7009c7e7442184a444f0
   Verge: 0086358d5865350b25e3939c9b6e66c05c3f3701
 
-PODFILE CHECKSUM: 4ab208015e52f8e3146e9d87ee2b7762f82553e0
+PODFILE CHECKSUM: 8d40f32de3f844bc383cedcd5ee377f5c8ad76c3
 
 COCOAPODS: 1.11.2
