@@ -1,5 +1,6 @@
 
 require_relative '../build.rb'
+require_relative '../shared_flags.rb'
 
 module Pod
   class Command
@@ -17,6 +18,7 @@ module Pod
       def run
         puts "hi"
 
+        $is_in_frost = true
         install
       end
 
