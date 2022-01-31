@@ -30,6 +30,9 @@ PODS:
   - SVGKit (3.0.0):
     - CocoaLumberjack (~> 3.0)
   - SwiftDate (6.3.1)
+  - Texture/Core (3.1.0)
+  - Texture/Video (3.1.0):
+    - Texture/Core
 
 DEPENDENCIES:
   - FBSDKCoreKit
@@ -45,6 +48,8 @@ DEPENDENCIES:
   - SSZipArchive
   - SVGKit
   - SwiftDate
+  - Texture/Core
+  - Texture/Video
 
 SPEC REPOS:
   trunk:
@@ -65,6 +70,7 @@ SPEC REPOS:
     - SSZipArchive
     - SVGKit
     - SwiftDate
+    - Texture
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
@@ -84,7 +90,8 @@ SPEC CHECKSUMS:
   SSZipArchive: e7b4f3d9e780c2acc1764cd88fbf2de28f26e5b2
   SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
   SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
+  Texture: 2e8ab2519452515f7f5a520f5a8f7e0a413abfa3
 
-PODFILE CHECKSUM: abb7ff3666e34f34f75838ef9f3748a954e306c7
+PODFILE CHECKSUM: f4ef42956cf5283eeff010b71b987c1e168efbf0
 
 COCOAPODS: 1.11.2

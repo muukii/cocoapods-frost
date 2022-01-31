@@ -57,6 +57,11 @@ module Pod
 
         targets = installer.pod_targets
 
+        Pod::UI.puts "Target pods to create xcramework"
+        $target_names.each do |name|
+          Pod::UI.puts "  - 📦 #{name}"
+        end
+
         targets.each do |target|
 
           unless $target_names.include?(target.name)
