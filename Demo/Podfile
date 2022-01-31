@@ -6,7 +6,7 @@ platform :ios, '12.0'
 
 target 'Demo' do
 
-  pod "Texture/Core", path: "./Pods/Frost/out"
+  frost_pod "Texture/Core", path: "./Pods/Frost/out"
 #  pod "Texture/Video", path: "./Pods/Frost/out"
 
   # pod "JAYSON"
