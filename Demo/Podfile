@@ -4,20 +4,35 @@ plugin "cocoapods-frost"
 use_frameworks!
 platform :ios, '12.0'
 
+install! "cocoapods",
+         :generate_multiple_pod_projects => true,
+         :incremental_installation => false
+
+
 target 'Demo' do
 
-  # frost_pod "Texture/Core", path: "./Pods/Frost/out"
+  frost_pod "Moya"
+
+# frost_pod "Texture/Core", path: "./Pods/Frost/out"
 #  pod "Texture/Video", path: "./Pods/Frost/out"
 
-  frost_pod "JAYSON", path: "./Pods/Frost/out"
-  # pod "Verge"
+  # frost_pod "JAYSON"
+  
   # pod "Brightroom"
 
   # pod "FBSDKCoreKit"
   # pod "FBSDKLoginKit"
 
-  # pod "SSZipArchive"
+  # frost_pod "SSZipArchive"
+  
+  # frost_pod "SwiftDate"
+  # frost_pod "RxSwift"
+  # frost_pod "RxCocoa"
+  # frost_pod "RxRelay"
+  # frost_pod "RxFuture"
+  # frost_pod "lottie-ios"
 
+  # pod "Verge"
   # pod "Firebase/Core"
   # pod "Firebase/Performance"
   # pod "Firebase/Messaging"
@@ -27,15 +42,9 @@ target 'Demo' do
   # pod "FirebaseUI/OAuth"
   # pod "Firebase/Crashlytics"
   # pod "Firebase/Analytics"
-  # pod "Moya"
-  # pod "SwiftDate"
-  # pod "RxSwift"
-  # pod "RxCocoa"
-  # pod "RxRelay"
-  # pod "RxFuture"
 
   # pod "gRPC-Swift", ">=1.4.2"
-  # pod "lottie-ios"
+  
   # pod "MagazineLayout"
   # pod "SVGKit"
 end

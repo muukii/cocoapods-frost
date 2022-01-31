@@ -23,3 +23,21 @@ func run_JAYSON() {
 }
 #endif
 
+#if canImport(SSZipArchive)
+import SSZipArchive
+#warning("✅")
+#endif
+
+import Alamofire
+//import Moya
+import RxSwift
+
+
+func run() {
+  
+  Observable<Void>.create { _ in
+    
+    return Disposables.create()
+  }
+  
+}

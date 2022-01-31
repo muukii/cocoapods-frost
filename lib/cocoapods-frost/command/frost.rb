@@ -59,16 +59,13 @@ module Pod
 
         targets.each do |target|
 
+          unless $target_names.include?(target.name)
+            next
+          end
+
           puts "📦 Build #{target.name}"
 
-          copied_root_spec = target.root_spec.clone
-
-          # generate_podspec_for_xcframework(
-          #   podspec: copied_root_spec,
-          #   xcframework_path: ""
-          # )
-
-          # p CocoapodsFrost.xcodebuild
+          copied_root_spec = target.root_spec.clone          
 
           configuration = "Release"
 
@@ -112,6 +109,8 @@ def generate_podspec_for_xcframework(podspec:, xcframework_path:)
     # }
     podspec.attributes_hash["vendored_frameworks"] = ["#{xcframework_path}"]
   else
+
+    
 
   end
 
