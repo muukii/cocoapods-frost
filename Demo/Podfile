@@ -1,4 +1,6 @@
 
+plugin "cocoapods-frost"
+
 use_frameworks!
 platform :ios, '12.0'
 
