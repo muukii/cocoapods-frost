@@ -61,7 +61,12 @@ module Pod
 
           puts "📦 Build #{target.name}"
 
-          p target.root_spec.attributes_hash
+          copied_root_spec = target.root_spec.clone
+
+          # generate_podspec_for_xcframework(
+          #   podspec: copied_root_spec,
+          #   xcframework_path: ""
+          # )
 
           # p CocoapodsFrost.xcodebuild
 
@@ -76,8 +81,16 @@ module Pod
             configuration: configuration
           )        
 
-        end
+          podspec = generate_podspec_for_xcframework(
+            podspec: copied_root_spec,
+            xcframework_path: Pathname(xcframework_path).relative_path_from(working_directory.join("./out"))
+          )        
+        
+          podspec_path = working_directory.join("./out/#{podspec.name}.podspec.json")
+          File.write(podspec_path, podspec.to_pretty_json)
+          Pod::UI.puts "Created #{podspec_path}"
 
+        end
         
         Pod::UI.puts "✅ Frost completed"
 
@@ -85,4 +98,22 @@ module Pod
 
     end
   end
+end
+
+# Returns attributes for podspec
+def generate_podspec_for_xcframework(podspec:, xcframework_path:)
+
+  if podspec.subspecs.empty?
+    podspec.attributes_hash.delete('source_files')
+
+    # podspec.attributes_hash["ios"] = {
+    #   "preserve_paths": "#{xcframework_path}",
+    #   "vendored_frameworks": "#{xcframework_path}"
+    # }
+    podspec.attributes_hash["vendored_frameworks"] = ["#{xcframework_path}"]
+  else
+
+  end
+
+  podspec
 end

@@ -6,15 +6,20 @@
 //
 
 import Foundation
+
+#if canImport(AsyncDisplayKit)
 import AsyncDisplayKit
-
-enum Demo {
+#warning("✅")
+func run_AsyncDisplayKit() {
   
-  static func run() {
-    
-    print(ASDisplayNode.self)
-
-//    print(ASVideoNode.self)
-    
-  }
 }
+#endif
+
+#if canImport(JAYSON)
+import JAYSON
+#warning("✅")
+func run_JAYSON() {
+  let j = JAYSON.JSON.init()
+}
+#endif
+

@@ -1,16 +1,16 @@
 PODS:
-  - Texture/Core (3.1.0)
+  - JAYSON (2.4.0)
 
 DEPENDENCIES:
-  - Texture/Core (from `./Pods/Frost/out`)
+  - JAYSON (from `./Pods/Frost/out`)
 
 EXTERNAL SOURCES:
-  Texture:
+  JAYSON:
     :path: "./Pods/Frost/out"
 
 SPEC CHECKSUMS:
-  Texture: 246282154179f01f4b3949cd3dde17f38ee861cb
+  JAYSON: 67b8d2a4991fa2e8eb1789c33021aeb01c1b3d7e
 
-PODFILE CHECKSUM: cdf8adf0d0c1493be2290c02c518f0e0f553873c
+PODFILE CHECKSUM: fdcd317cddac449f9c8a91b597100f1694489216
 
 COCOAPODS: 1.11.2
