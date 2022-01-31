@@ -5,7 +5,12 @@ module Pod
     module DSL
 
       def frost_pod(name, *args)
-        puts "Frost =>", $is_in_frost ? "true" : "false"
+        
+        if $is_in_frost 
+          args.each do |element|
+            element.delete(:path) unless element[:path].nil?
+          end        
+        end
         pod(name, *args)
       end
 
