@@ -110,7 +110,11 @@ def generate_podspec_for_xcframework(podspec:, xcframework_path:)
     podspec.attributes_hash["vendored_frameworks"] = ["#{xcframework_path}"]
   else
 
-    
+    podspec.subspecs.each do |subspec|
+      subspec.attributes_hash.delete('source_files')
+    end
+
+    podspec.attributes_hash["vendored_frameworks"] = ["#{xcframework_path}"]
 
   end
 

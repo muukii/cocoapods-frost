@@ -16,21 +16,21 @@ target 'Demo' do
 # frost_pod "Texture/Core", path: "./Pods/Frost/out"
 #  pod "Texture/Video", path: "./Pods/Frost/out"
 
-  # frost_pod "JAYSON"
+  frost_pod "JAYSON"
   
   # pod "Brightroom"
 
-  # pod "FBSDKCoreKit"
-  # pod "FBSDKLoginKit"
+  pod "FBSDKCoreKit"
+  pod "FBSDKLoginKit"
 
-  # frost_pod "SSZipArchive"
+  frost_pod "SSZipArchive"
   
-  # frost_pod "SwiftDate"
-  # frost_pod "RxSwift"
-  # frost_pod "RxCocoa"
-  # frost_pod "RxRelay"
-  # frost_pod "RxFuture"
-  # frost_pod "lottie-ios"
+  frost_pod "SwiftDate"
+  frost_pod "RxSwift"
+  frost_pod "RxCocoa"
+  frost_pod "RxRelay"
+  frost_pod "RxFuture"
+  frost_pod "lottie-ios"
 
   # pod "Verge"
   # pod "Firebase/Core"
@@ -45,8 +45,8 @@ target 'Demo' do
 
   # pod "gRPC-Swift", ">=1.4.2"
   
-  # pod "MagazineLayout"
-  # pod "SVGKit"
+  frost_pod "MagazineLayout"
+  frost_pod "SVGKit"
 end
 
 pre_install do |installer|

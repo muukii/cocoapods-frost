@@ -1,19 +1,8 @@
 PODS:
   - Alamofire (5.5.0)
-  - Brightroom (2.5.0):
-    - Brightroom/Engine (= 2.5.0)
-    - Brightroom/UI-Classic (= 2.5.0)
-    - Brightroom/UI-Crop (= 2.5.0)
-    - Verge/Store (>= 8.9.1)
-  - Brightroom/Engine (2.5.0):
-    - Verge/Store (>= 8.9.1)
-  - Brightroom/UI-Classic (2.5.0):
-    - Brightroom/Engine
-    - TransitionPatch
-    - Verge/Store (>= 8.9.1)
-  - Brightroom/UI-Crop (2.5.0):
-    - Brightroom/Engine
-    - Verge/Store (>= 8.9.1)
+  - CocoaLumberjack (3.7.4):
+    - CocoaLumberjack/Core (= 3.7.4)
+  - CocoaLumberjack/Core (3.7.4)
   - FBAEMKit (12.3.1):
     - FBSDKCoreKit_Basics (= 12.3.1)
   - FBSDKCoreKit (12.3.1):
@@ -24,6 +13,7 @@ PODS:
     - FBSDKCoreKit (= 12.3.1)
   - JAYSON (2.4.0)
   - lottie-ios (3.3.0)
+  - MagazineLayout (1.6.5)
   - Moya (15.0.0):
     - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
@@ -37,76 +27,64 @@ PODS:
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
   - SSZipArchive (2.4.2)
+  - SVGKit (3.0.0):
+    - CocoaLumberjack (~> 3.0)
   - SwiftDate (6.3.1)
-  - TransitionPatch (1.0.5)
-  - Verge/ObjcBridge (8.15.1)
-  - Verge/Store (8.15.1):
-    - Verge/ObjcBridge
 
 DEPENDENCIES:
-  - Brightroom
   - FBSDKCoreKit
   - FBSDKLoginKit
-  - JAYSON (from `./Pods/Frost/out/JAYSON.podspec.json`)
-  - lottie-ios (from `./Pods/Frost/out/lottie-ios.podspec.json`)
-  - Moya (from `./Pods/Frost/out/Moya.podspec.json`)
-  - RxCocoa (from `./Pods/Frost/out/RxCocoa.podspec.json`)
-  - RxFuture (from `./Pods/Frost/out/RxFuture.podspec.json`)
-  - RxRelay (from `./Pods/Frost/out/RxRelay.podspec.json`)
-  - RxSwift (from `./Pods/Frost/out/RxSwift.podspec.json`)
-  - SSZipArchive (from `./Pods/Frost/out/SSZipArchive.podspec.json`)
-  - SwiftDate (from `./Pods/Frost/out/SwiftDate.podspec.json`)
+  - JAYSON
+  - lottie-ios
+  - MagazineLayout
+  - Moya
+  - RxCocoa
+  - RxFuture
+  - RxRelay
+  - RxSwift
+  - SSZipArchive
+  - SVGKit
+  - SwiftDate
 
 SPEC REPOS:
   trunk:
     - Alamofire
-    - Brightroom
+    - CocoaLumberjack
     - FBAEMKit
     - FBSDKCoreKit
     - FBSDKCoreKit_Basics
     - FBSDKLoginKit
-    - TransitionPatch
-    - Verge
-
-EXTERNAL SOURCES:
-  JAYSON:
-    :path: "./Pods/Frost/out/JAYSON.podspec.json"
-  lottie-ios:
-    :path: "./Pods/Frost/out/lottie-ios.podspec.json"
-  Moya:
-    :path: "./Pods/Frost/out/Moya.podspec.json"
-  RxCocoa:
-    :path: "./Pods/Frost/out/RxCocoa.podspec.json"
-  RxFuture:
-    :path: "./Pods/Frost/out/RxFuture.podspec.json"
-  RxRelay:
-    :path: "./Pods/Frost/out/RxRelay.podspec.json"
-  RxSwift:
-    :path: "./Pods/Frost/out/RxSwift.podspec.json"
-  SSZipArchive:
-    :path: "./Pods/Frost/out/SSZipArchive.podspec.json"
-  SwiftDate:
-    :path: "./Pods/Frost/out/SwiftDate.podspec.json"
+    - JAYSON
+    - lottie-ios
+    - MagazineLayout
+    - Moya
+    - RxCocoa
+    - RxFuture
+    - RxRelay
+    - RxSwift
+    - SSZipArchive
+    - SVGKit
+    - SwiftDate
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
-  Brightroom: 95620f8638003371c3e1c0606ffdb242514f7dcb
+  CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
   FBAEMKit: 98e4afc9f867c6db3d1c0e7e3727d94a630b5f59
   FBSDKCoreKit: 4f348872eae956c922aca1a13771b9c2d4602088
   FBSDKCoreKit_Basics: b832439de7a8262ee17495889264e75785af54de
   FBSDKLoginKit: 4adb764028103621b48dfd601b08b03fe2114cdf
-  JAYSON: 67b8d2a4991fa2e8eb1789c33021aeb01c1b3d7e
-  lottie-ios: 092fb3a4d6e807ee1a6ee46f66241e6f6892aa2e
+  JAYSON: 0d22863627eb0637f5b1c50c1e15ee78949f7088
+  lottie-ios: 6ac74dcc09904798f59b18cb3075c089d76be9ae
+  MagazineLayout: aa7a1a70aac10791a08a29790320de0670e3f4ba
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
-  RxCocoa: d4aa3431f81fb91bbbc5a243c732cca1da3aaab6
-  RxFuture: e684002a255b65a7e63df932ad4255b7e347f3ed
-  RxRelay: 7523fb4f6a2dccc112c317180b580e09fbd64b4c
-  RxSwift: 6e7545c81dfc63bcb80fe934908eb08b4e97fe03
-  SSZipArchive: 2d7ecaa8da4b6d25643541001c74c8a4cd362b93
-  SwiftDate: ec25ae08abf124450bd4fbb8324d0c576cc7b135
-  TransitionPatch: e401775146cbe326605b7009c7e7442184a444f0
-  Verge: 0086358d5865350b25e3939c9b6e66c05c3f3701
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxFuture: aee8c04135ebda1789d239284d5f359d7aab5257
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  SSZipArchive: e7b4f3d9e780c2acc1764cd88fbf2de28f26e5b2
+  SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
+  SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
 
-PODFILE CHECKSUM: d99e8af1bd1c190fba299a75ca8828dba9496f67
+PODFILE CHECKSUM: abb7ff3666e34f34f75838ef9f3748a954e306c7
 
 COCOAPODS: 1.11.2
