@@ -24,6 +24,13 @@ If you are interested in this project or you need
 - Supports static or dynamic by `use_frameworks! :linkage => :static`
 - Supports coexisting in source code and frameworks
 
+## known Issues
+
+Managed in [issues](https://github.com/muukii/cocoapods-frost/issues)
+
+- some pods fails build
+  - especially, already provided as framework
+
 ## How it works
 
 - Defines pod by `frost_pod` that creates XCFramework.
