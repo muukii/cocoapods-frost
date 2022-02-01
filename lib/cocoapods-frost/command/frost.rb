@@ -64,13 +64,17 @@ module Pod
 
         targets.each do |target|
 
-          unless $target_names.include?(target.name)
+          unless $target_names.any? { |name| name.start_with?(target.name) }
             next
           end
 
           puts "📦 Build #{target.name}"
-
-          copied_root_spec = target.root_spec.clone          
+         
+          # For Debugging before building
+          # generate_podspec_for_xcframework(
+          #   target: target,
+          #   xcframework_path: ""
+          # )   
 
           configuration = "Release"
 
@@ -84,7 +88,7 @@ module Pod
           )        
 
           podspec = generate_podspec_for_xcframework(
-            podspec: copied_root_spec,
+            target: target,
             xcframework_path: Pathname(xcframework_path).relative_path_from(working_directory.join("./out"))
           )        
         
@@ -103,25 +107,40 @@ module Pod
 end
 
 # Returns attributes for podspec
-def generate_podspec_for_xcframework(podspec:, xcframework_path:)
+def generate_podspec_for_xcframework(target:, xcframework_path:)
+
+  podspec = target.root_spec.clone          
 
   if podspec.subspecs.empty?
     podspec.attributes_hash.delete('source_files')
 
-    # podspec.attributes_hash["ios"] = {
-    #   "preserve_paths": "#{xcframework_path}",
-    #   "vendored_frameworks": "#{xcframework_path}"
-    # }
     podspec.attributes_hash["vendored_frameworks"] = ["#{xcframework_path}"]
   else
 
-    podspec.subspecs.each do |subspec|
-      subspec.attributes_hash.delete('source_files')
+    ## Finds depedencies by specified subspecs
+    gathered_dependencies = podspec
+      .subspecs
+      .filter { |s| 
+        target.library_specs
+          .filter { |l| l.name.start_with?(podspec.name) == false }
+          .any? { |l| l.name == s.name }
+      }
+
+    ## Merge into one hash from all of dependencies
+    dependencies_hash = podspec.attributes_hash["dependencies"] || {}
+
+    gathered_dependencies.each do |spec|      
+      dependencies_hash = dependencies_hash.merge(spec.attributes_hash["dependencies"] || {})
     end
+      
+    podspec.attributes_hash["dependencies"] = dependencies_hash
+    
+    podspec.subspecs = []
+    podspec.attributes_hash.delete("default_subspecs")
 
     podspec.attributes_hash["vendored_frameworks"] = ["#{xcframework_path}"]
 
   end
 
-  podspec
+  return podspec
 end

@@ -20,14 +20,14 @@ module Pod
           # TODO: raises an error path pointing generated podspec.
           pod(name, *args)
         else
-          path = "./Pods/Frost/out/#{name}.podspec.json"
-          if File.exist?(path) 
-            Pod::UI.puts "📦 #{name} - Found generated podspec."
-            pod(name, *args, path: path)
-          else
-            Pod::UI.warn "📦 #{name} - Not Found generated podspec."
-            pod(name, *args)
+
+          regex_for_subspec_specifier = /\/.*/          
+          unless regex_for_subspec_specifier.match(name).nil?
+            Pod::UI.puts "[Frost] #{name} Specifying subspecs converts to whole installing."
+            name = name.gsub(regex_for_subspec_specifier, "")
           end
+
+          pod(name, *args, path: "./Pods/Frost/out")
         end        
       end
 

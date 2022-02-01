@@ -10,7 +10,7 @@ module CocoapodsFrost
     scheme:,
     configuration:
   )
-    Pod::UI.puts "🚜 #{module_name} -> Building into #{output_directory}"
+    Pod::UI.puts "🚜 #{module_name} -> #{configuration} Building into #{output_directory}"
 
     options = []
 

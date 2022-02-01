@@ -5,13 +5,25 @@
   "version": "0.2.0",  
   "configurations": [    
     {    
-      "name": "Debug Local File",
+      "name": "Frost",
       "type": "Ruby",
       "request": "launch",
       "program": "${workspaceRoot}/local_pod.rb",
       "args": [
          "frost"
         ],
+      "useBundler": true,
+      "cwd": "${workspaceRoot}/Demo"
+      // "preLaunchTask": "clean"
+    },
+    {
+      "name": "Install",
+      "type": "Ruby",
+      "request": "launch",
+      "program": "${workspaceRoot}/local_pod.rb",
+      "args": [
+        "install"
+      ],
       "useBundler": true,
       "cwd": "${workspaceRoot}/Demo"
       // "preLaunchTask": "clean"

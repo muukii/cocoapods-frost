@@ -11,10 +11,15 @@ install! "cocoapods",
 
 target 'Demo' do
 
-  frost_pod "Moya"
-
+  # frost_pod "Moya/Core"
   frost_pod "Texture/Core"
   frost_pod "Texture/Video"
+
+  break
+
+  
+  # frost_pod "Texture/Core"  
+  # frost_pod "Texture/Video"
 
   frost_pod "JAYSON"
   
