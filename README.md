@@ -30,6 +30,7 @@ Managed in [issues](https://github.com/muukii/cocoapods-frost/issues)
 
 - some pods fails build
   - especially, already provided as framework
+  - if you found such pod, please report it from [issues](https://github.com/muukii/cocoapods-frost/issues)
 
 ## How it works
 
