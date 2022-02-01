@@ -37,6 +37,10 @@ Managed in [issues](https://github.com/muukii/cocoapods-frost/issues)
 - Multiple specifying pods with `pod` and `frost_pod`
   - Do not use `pod` and `frost_pod` in different target. Please use either one.
 
+## Attention
+
+- Should build all of targets when pod updated - partially building might causes liking error (compile-time or dynamic-linking-time)
+
 ## How it works
 
 - Defines pod by `frost_pod` that creates XCFramework.
