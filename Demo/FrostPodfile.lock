@@ -2,6 +2,7 @@ PODS:
   - Advance (3.1.1)
   - Alamofire (5.5.0)
   - AppVersionMonitor (1.4.2)
+  - ImageScrollView (1.9.3)
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
   - Realm (10.22.0):
@@ -16,6 +17,7 @@ PODS:
 DEPENDENCIES:
   - "Advance (from `git@github.com:timdonnelly/Advance.git`, branch `master`)"
   - AppVersionMonitor
+  - ImageScrollView (>= 1.8)
   - Moya/Core
   - RealmSwift
   - Texture/Core
@@ -25,6 +27,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - AppVersionMonitor
+    - ImageScrollView
     - Moya
     - Realm
     - RealmSwift
@@ -44,11 +47,12 @@ SPEC CHECKSUMS:
   Advance: 1fdaffe719fadf10e6bbfd6933d6b5c928b4363d
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   AppVersionMonitor: 72ec0fcc428e8a40425acd27b1d7954f56a13005
+  ImageScrollView: d3ce8371e0d44299b2b638410db45387e18aa83f
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   Realm: d9e4e5877095a6722145811f56fe89a531c9659d
   RealmSwift: e4191b4b957fcfcbed23751ec65eec98f8173ab5
   Texture: 2e8ab2519452515f7f5a520f5a8f7e0a413abfa3
 
-PODFILE CHECKSUM: a2ab199ee1d75d33873beab49a9cd2f516e8ebc8
+PODFILE CHECKSUM: faec14db891ed320693b0bd23590dde62a0f7896
 
 COCOAPODS: 1.11.2

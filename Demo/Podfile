@@ -20,6 +20,7 @@ target 'Demo' do
   pod "Advance", git: "git@github.com:timdonnelly/Advance.git", branch: "master"
 
   pod 'RealmSwift'
+  frost_pod "ImageScrollView", ">= 1.8"
 
   break
   

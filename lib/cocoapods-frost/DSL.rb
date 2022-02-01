@@ -28,7 +28,8 @@ module Pod
           end
 
           Pod::UI.puts "📦 #{name} Use XCFramework"
-          pod(name, *args, path: "./FrostPods/GeneratedPods/#{name}")
+          # drop args and use path to install local pod instead.
+          pod(name, path: "./FrostPods/GeneratedPods/#{name}")
         end        
       end
 

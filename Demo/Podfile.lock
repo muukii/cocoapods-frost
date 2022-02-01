@@ -1,37 +1,59 @@
 PODS:
+  - Advance (3.1.1)
   - Alamofire (5.5.0)
-  - CocoaLumberjack (3.7.4):
-    - CocoaLumberjack/Core (= 3.7.4)
-  - CocoaLumberjack/Core (3.7.4)
-  - Moya/Core (15.0.0):
+  - AppVersionMonitor (1.4.2)
+  - ImageScrollView (1.9.3)
+  - Moya (15.0.0):
     - Alamofire (~> 5.0)
-  - SVGKit (3.0.0):
-    - CocoaLumberjack (~> 3.0)
-  - Texture/Core (3.1.0)
-  - Texture/Video (3.1.0):
-    - Texture/Core
+  - Realm (10.22.0):
+    - Realm/Headers (= 10.22.0)
+  - Realm/Headers (10.22.0)
+  - RealmSwift (10.22.0):
+    - Realm (= 10.22.0)
+  - Texture (3.1.0)
 
 DEPENDENCIES:
-  - Moya/Core
-  - SVGKit
-  - Texture/Core
-  - Texture/Video
+  - "Advance (from `git@github.com:timdonnelly/Advance.git`, branch `master`)"
+  - AppVersionMonitor (from `./FrostPods/GeneratedPods/AppVersionMonitor`)
+  - ImageScrollView (from `./FrostPods/GeneratedPods/ImageScrollView`)
+  - Moya (from `./FrostPods/GeneratedPods/Moya`)
+  - RealmSwift
+  - Texture (from `./FrostPods/GeneratedPods/Texture`)
 
 SPEC REPOS:
   trunk:
     - Alamofire
-    - CocoaLumberjack
-    - Moya
-    - SVGKit
-    - Texture
+    - Realm
+    - RealmSwift
+
+EXTERNAL SOURCES:
+  Advance:
+    :branch: master
+    :git: "git@github.com:timdonnelly/Advance.git"
+  AppVersionMonitor:
+    :path: "./FrostPods/GeneratedPods/AppVersionMonitor"
+  ImageScrollView:
+    :path: "./FrostPods/GeneratedPods/ImageScrollView"
+  Moya:
+    :path: "./FrostPods/GeneratedPods/Moya"
+  Texture:
+    :path: "./FrostPods/GeneratedPods/Texture"
+
+CHECKOUT OPTIONS:
+  Advance:
+    :commit: 3156e6c5ba2960de7b5a910a2c8433d7fd612c25
+    :git: "git@github.com:timdonnelly/Advance.git"
 
 SPEC CHECKSUMS:
+  Advance: 1fdaffe719fadf10e6bbfd6933d6b5c928b4363d
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
-  CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
-  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
-  SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
-  Texture: 2e8ab2519452515f7f5a520f5a8f7e0a413abfa3
+  AppVersionMonitor: 161e0f05bd217c5df4eca8cc0f25e6b8344f8e61
+  ImageScrollView: 191379a110fc18ac286c8fb557309efcb7c0f85e
+  Moya: ff2e9953b582d76324cf9b4206c87437a6d444b4
+  Realm: d9e4e5877095a6722145811f56fe89a531c9659d
+  RealmSwift: e4191b4b957fcfcbed23751ec65eec98f8173ab5
+  Texture: d16c8e097d87432345310de222ea94119515abf9
 
-PODFILE CHECKSUM: df035e944b121c33c2ea71f785d96150f85b8516
+PODFILE CHECKSUM: faec14db891ed320693b0bd23590dde62a0f7896
 
 COCOAPODS: 1.11.2
