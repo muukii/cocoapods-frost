@@ -33,10 +33,10 @@ module Pod
 
         unless gitignore_path.exist?
           File.write(gitignore_path, %{
-          build
-          out
-          Pods
-          })
+build
+out
+Pods
+})
         end
 
         sandbox = Sandbox.new(working_directory.join("Pods"))
