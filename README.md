@@ -38,6 +38,7 @@ Managed in [issues](https://github.com/muukii/cocoapods-frost/issues)
   - Do not use `pod` and `frost_pod` in different target. Please use either one.
 - Not inherited current install version in pod
   - Specify install version (e.g. `pod 'some', "1.2.0"`)
+- [Not supported yet building pod that has resource](https://github.com/muukii/cocoapods-frost/issues/7)
 
 ## Attention
 
