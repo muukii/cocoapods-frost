@@ -62,9 +62,11 @@ Pods
 
         # Install procedure manuall instead of using install!
         # No validation.
-
-        installer.resolve_dependencies
         
+        installer.prepare
+        installer.resolve_dependencies
+        installer.download_dependencies
+                
         # Supports unknown swift-version pods
         installer.pod_targets.filter(&:uses_swift?).each do |target|
           if target.spec_swift_versions.empty?
@@ -93,6 +95,8 @@ Pods
         $target_names.each do |name|
           Pod::UI.puts "  - 📦 #{name}"
         end
+
+        FileUtils.rm_rf(working_directory.join("GeneratedPods"))
 
         targets.each do |target|
 

@@ -27,6 +27,7 @@ module Pod
             name = name.gsub(regex_for_subspec_specifier, "")
           end
 
+          Pod::UI.puts "📦 #{name} Use XCFramework"
           pod(name, *args, path: "./FrostPods/GeneratedPods/#{name}")
         end        
       end
