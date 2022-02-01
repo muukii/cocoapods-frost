@@ -19,6 +19,11 @@ If you are interested in this project or you need
 <img width="230" alt="yellow-button" src="https://user-images.githubusercontent.com/1888355/146226808-eb2e9ee0-c6bd-44a2-a330-3bbc8a6244cf.png">
 </a>
 
+## Features
+
+- Supports static or dynamic by `use_frameworks! :linkage => :static`
+- Supports coexisting in source code and frameworks
+
 ## How it works
 
 - Defines pod by `frost_pod` that creates XCFramework.
