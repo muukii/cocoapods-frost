@@ -31,6 +31,9 @@ Managed in [issues](https://github.com/muukii/cocoapods-frost/issues)
 - some pods fails build
   - especially, already provided as framework
   - if you found such pod, please report it from [issues](https://github.com/muukii/cocoapods-frost/issues)
+- Does not create xcframework for implicit dependencies from a pod
+  - Make it explicit using `frost_pod`.
+  - For instance, `frost_pod 'Alamofire'` for `frost_pod 'Moya'`
 
 ## How it works
 
