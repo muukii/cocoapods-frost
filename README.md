@@ -11,9 +11,24 @@ A plugin for [CocoaPods](https://cocoapods.org/) that creates XCFramework(for in
 
 ## Usage
 
+Make bundler installs `cocoapods-frost`
+
+`Gemfile`
+```
+gem 'cocoapods-frost', git: "https://github.com/muukii/cocoapods-frost.git", branch: "main"
+```
+
+Annotate Podfile that uses `cocoapods-frost` as plugin
+
+`Podfile`
+```ruby
+plugin "cocoapods-frost"
+```
+
 Specifies pods with `pod_frost` that needs to create XCFramework.  
 Still, using `pod` can be left to build from source code.
 
+`Podfile`
 ```ruby
 frost_pod "Moya"
 frost_pod "MondrianLayout"
@@ -21,7 +36,29 @@ frost_pod "MondrianLayout"
 pod "JAYSON"
 ```
 
-## Subspecs
+Build XCFrameworks
+
+```sh
+$ bundle exec pod frost
+```
+
+Then
+
+```sh
+$ bundle exec pod install
+```
+
+## Directory structure
+
+- Repository
+  - Podfile
+  - Podfile.lock
+  - FrostPodfile.lock `cocoapods-frost` creates, should be managed in git
+  - Pods
+  - FrostPods <- `cocoapods-frost` creates
+    - GeneratedPods (should be managed in git, git-lfs, something else)
+
+## About subspecs
 
 CocoaPods integrates multiple subspecs into one module.  
 Generated XCFramework contains all of subspecs specified in Podfile.
