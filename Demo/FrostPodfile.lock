@@ -1,27 +1,37 @@
 PODS:
   - Alamofire (5.5.0)
+  - CocoaLumberjack (3.7.4):
+    - CocoaLumberjack/Core (= 3.7.4)
+  - CocoaLumberjack/Core (3.7.4)
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
+  - SVGKit (3.0.0):
+    - CocoaLumberjack (~> 3.0)
   - Texture/Core (3.1.0)
   - Texture/Video (3.1.0):
     - Texture/Core
 
 DEPENDENCIES:
   - Moya/Core
+  - SVGKit
   - Texture/Core
   - Texture/Video
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - CocoaLumberjack
     - Moya
+    - SVGKit
     - Texture
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  SVGKit: 1ad7513f8c74d9652f94ed64ddecda1a23864dea
   Texture: 2e8ab2519452515f7f5a520f5a8f7e0a413abfa3
 
-PODFILE CHECKSUM: fcfdbf41f85da94c7bc13b75279e75a3fc825a00
+PODFILE CHECKSUM: df035e944b121c33c2ea71f785d96150f85b8516
 
 COCOAPODS: 1.11.2

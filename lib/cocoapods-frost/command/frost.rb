@@ -124,6 +124,7 @@ module Pod
         end
         
         Pod::UI.puts "✅ Frost completed"
+        Pod::UI.puts "Next: pod install"
 
       end
 

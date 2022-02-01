@@ -15,9 +15,9 @@ target 'Demo' do
   frost_pod "Moya/Core"
   frost_pod "Texture/Core"
   frost_pod "Texture/Video"
+  frost_pod "SVGKit"
 
   break
-
   
   # frost_pod "Texture/Core"  
   # frost_pod "Texture/Video"
@@ -52,7 +52,7 @@ target 'Demo' do
   # pod "gRPC-Swift", ">=1.4.2"
   
   frost_pod "MagazineLayout"
-  frost_pod "SVGKit"
+  
 end
 
 pre_install do |installer|
