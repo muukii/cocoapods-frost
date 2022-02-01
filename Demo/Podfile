@@ -1,7 +1,8 @@
 
 plugin "cocoapods-frost"
 
-use_frameworks!
+use_frameworks! :linkage => :static
+
 platform :ios, '12.0'
 
 install! "cocoapods",

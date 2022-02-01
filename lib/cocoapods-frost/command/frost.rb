@@ -17,8 +17,6 @@ module Pod
       ##
       # The entrypoint of this command
       def run
-        puts "hi"
-
         $is_in_frost = true
         install
       end
@@ -27,17 +25,25 @@ module Pod
 
       def install
 
-        working_directory = Pathname.new(File.join(config.sandbox_root, "Frost"))
+        working_directory = Pathname.new(File.join(config.project_root, "FrostPods"))
 
-        sandbox = Sandbox.new(working_directory)
+        FileUtils.mkdir_p(working_directory)
+
+        gitignore_path = working_directory.join(".gitignore")
+
+        unless gitignore_path.exist?
+          File.write(gitignore_path, %{
+          build
+          out
+          Pods
+          })
+        end
+
+        sandbox = Sandbox.new(working_directory.join("Pods"))
         
-        # podfile = Pod::Podfile.new(File.join(config.sandbox_root, "../Podfile"))
-        podfile = Pod::Podfile.from_file(File.join(config.sandbox_root, "../Podfile"))
+        podfile = Pod::Podfile.from_file(File.join(config.project_root, "./Podfile"))
 
-        # analyzer = Pod::Installer::Analyzer.new(sandbox, podfile)
-        # p analyzer.analyze
-
-        lockfile_path = File.join(config.sandbox_root, "./Podfile.lock")
+        lockfile_path = File.join(config.project_root, "./FrostPodfile.lock")
       
         lockfile = Pod::Lockfile.from_file(Pathname.new(lockfile_path))
 
@@ -78,33 +84,37 @@ module Pod
             target: target,
             xcframework_path: ""
           )  
-          
+                  
           ## Build XCFramework
           configuration = "Release"
           xcframework_path = CocoapodsFrost.create_xcframewrok(
-            output_directory: working_directory.join("./out"),
+            output_directory: working_directory.join("./build"),
             build_directory: working_directory.join("./build"),
             module_name: target.product_module_name,
             project_name: sandbox.project_path.realdirpath,
             scheme: target.label,
             configuration: configuration
           )    
-
+        
           ## Generated podspec.json
           podspec = generate_podspec_for_xcframework(
             target: target,
             xcframework_path: Pathname(xcframework_path).relative_path_from(working_directory.join("./out"))
-          )    
-
-          ## Prepare directory
-          pod_directory = working_directory.join("./GeneratedPods/#{podspec.name}")          
+          ) 
+                
+          ## Prepare directory                
+          pod_directory = working_directory.join("./GeneratedPods/#{podspec.name}")             
+          FileUtils.rm_rf(pod_directory)
           FileUtils.mkdir_p(pod_directory)
-                  
+
+          ## Make a original podspec file
+          File.write(pod_directory.join("original-podspec-#{target.name}.json"), target.root_spec.to_pretty_json)
+                                    
           ## Make a podspec file
           File.write(pod_directory.join("#{podspec.name}.podspec.json"), podspec.to_pretty_json)
          
           ## Move XCFramework into the directory
-          FileUtils.mv(xcframework_path, pod_directory, force: true)  
+          FileUtils.mv(xcframework_path, pod_directory)  
           
           ## Copy license files  into the directory
           target.file_accessors.each do |a|
@@ -126,7 +136,7 @@ end
 # Returns attributes for podspec
 def generate_podspec_for_xcframework(target:, xcframework_path:)
 
-  podspec = target.root_spec.clone          
+  podspec = target.root_spec.clone
 
   if podspec.subspecs.empty?
     podspec.attributes_hash.delete('source_files')
