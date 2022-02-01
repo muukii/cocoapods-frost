@@ -14,8 +14,10 @@ target 'Demo' do
   frost_pod "Moya/Core"
   frost_pod "Texture/Core"
   frost_pod "Texture/Video"
-  frost_pod "SVGKit"
+  # frost_pod "SVGKit"
   frost_pod "AppVersionMonitor"
+
+  pod "Advance", git: "git@github.com:timdonnelly/Advance.git", branch: "master"
 
   pod 'RealmSwift'
 
