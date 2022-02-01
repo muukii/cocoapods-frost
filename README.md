@@ -8,3 +8,15 @@ A plugin for [CocoaPods](https://cocoapods.org/) that creates XCFramework(for in
 - Builds and creates XCFramework with `-allow-internal-distribution` from build settings CocoaPods generated.
 - Generates a `podspec.json` that installs XCFramework as `vendored_frameworks`
 - `frost_pod` uses that generated podspec as a local pod. which installs XCFramework instead of sources.
+
+## Development
+
+It supports debugging in VSCode.
+
+## License
+
+MIT
+
+## Author
+
+- [Hiroshi Kimura (Muukii)](https://github.com/muukii)
