@@ -2,6 +2,21 @@
 
 A plugin for [CocoaPods](https://cocoapods.org/) that creates XCFramework(for internal distribution) for speeding up build time.
 
+**Alternatives**
+- [coocapods-binary](https://github.com/leavez/cocoapods-binary)
+- [PodBuilder](https://github.com/Subito-it/PodBuilder)
+- [Rugby](https://github.com/swiftyfinch/Rugby)
+
+## Support this project
+
+If you are interested in this project or you need
+- Hit the ⭐️ button to make this project popular.
+- Becoming sponsorship in subscription or one-time.
+
+<a href="https://www.buymeacoffee.com/muukii">
+<img width="230" alt="yellow-button" src="https://user-images.githubusercontent.com/1888355/146226808-eb2e9ee0-c6bd-44a2-a330-3bbc8a6244cf.png">
+</a>
+
 ## How it works
 
 - Defines pod by `frost_pod` that creates XCFramework.
