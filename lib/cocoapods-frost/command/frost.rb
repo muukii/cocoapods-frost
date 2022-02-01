@@ -89,6 +89,7 @@ Pods
         targets = installer.pod_targets
 
         Pod::UI.puts "Target pods to create xcramework"
+        $target_names = $target_names.uniq
         $target_names.each do |name|
           Pod::UI.puts "  - 📦 #{name}"
         end
