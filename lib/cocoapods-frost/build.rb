@@ -101,6 +101,8 @@ module CocoapodsFrost
 
     log = `#{command}`
 
+    Pod::UI.puts log
+
     if File.exist? output
       Pod::UI.puts "🚜 #{module_name} -> ✅ Success #{output}\n"
     else

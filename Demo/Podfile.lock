@@ -1,26 +1,27 @@
 PODS:
   - Alamofire (5.5.0)
-  - Moya/Core (15.0.0):
+  - Moya (15.0.0):
     - Alamofire (~> 5.0)
-  - Texture/Core (3.1.0)
-  - Texture/Video (3.1.0):
-    - Texture/Core
+  - Texture (3.1.0)
 
 DEPENDENCIES:
-  - Moya/Core
-  - Texture/Core
-  - Texture/Video
+  - Moya (from `./FrostPods/GeneratedPods/Moya`)
+  - Texture (from `./FrostPods/GeneratedPods/Texture`)
 
 SPEC REPOS:
   trunk:
     - Alamofire
-    - Moya
-    - Texture
+
+EXTERNAL SOURCES:
+  Moya:
+    :path: "./FrostPods/GeneratedPods/Moya"
+  Texture:
+    :path: "./FrostPods/GeneratedPods/Texture"
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
-  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
-  Texture: 2e8ab2519452515f7f5a520f5a8f7e0a413abfa3
+  Moya: ff2e9953b582d76324cf9b4206c87437a6d444b4
+  Texture: d16c8e097d87432345310de222ea94119515abf9
 
 PODFILE CHECKSUM: fcfdbf41f85da94c7bc13b75279e75a3fc825a00
 

@@ -84,11 +84,17 @@ module Pod
             target: target,
             xcframework_path: ""
           )  
+
+          ## Prepare directory     
+          pod_directory = working_directory.join("./GeneratedPods/#{target.root_spec.name}")   
+                                         
+          FileUtils.rm_rf(pod_directory)
+          FileUtils.mkdir_p(pod_directory)
                   
           ## Build XCFramework
           configuration = "Release"
           xcframework_path = CocoapodsFrost.create_xcframewrok(
-            output_directory: working_directory.join("./build"),
+            output_directory: pod_directory,
             build_directory: working_directory.join("./build"),
             module_name: target.product_module_name,
             project_name: sandbox.project_path.realdirpath,
@@ -99,23 +105,15 @@ module Pod
           ## Generated podspec.json
           podspec = generate_podspec_for_xcframework(
             target: target,
-            xcframework_path: Pathname(xcframework_path).relative_path_from(working_directory.join("./out"))
-          ) 
-                
-          ## Prepare directory                
-          pod_directory = working_directory.join("./GeneratedPods/#{podspec.name}")             
-          FileUtils.rm_rf(pod_directory)
-          FileUtils.mkdir_p(pod_directory)
+            xcframework_path: Pathname(xcframework_path).relative_path_from(pod_directory)
+          )                          
 
           ## Make a original podspec file
           File.write(pod_directory.join("original-podspec-#{target.name}.json"), target.root_spec.to_pretty_json)
                                     
           ## Make a podspec file
           File.write(pod_directory.join("#{podspec.name}.podspec.json"), podspec.to_pretty_json)
-         
-          ## Move XCFramework into the directory
-          FileUtils.mv(xcframework_path, pod_directory)  
-          
+                  
           ## Copy license files  into the directory
           target.file_accessors.each do |a|
             FileUtils.cp(a.license, pod_directory)
@@ -154,16 +152,33 @@ def generate_podspec_for_xcframework(target:, xcframework_path:)
 
     ## Merge into one hash from all of dependencies
     dependencies_hash = podspec.attributes_hash["dependencies"] || {}
+    frameworks = []
 
-    using_subspecs.each do |spec|      
+    using_subspecs.each do |spec|   
+      
+      ## Gathering dependencies without its subspec
       dependencies = spec.attributes_hash["dependencies"] || {}
       dependencies.delete_if { |key, _| 
         key.start_with?(podspec.name)
       }
       dependencies_hash = dependencies_hash.merge(dependencies)
+
+      ## Gathering frameworks needs to link dynamically
+      _frameworks = spec.attributes_hash["frameworks"]
+      unless _frameworks.nil?
+        if _frameworks.kind_of?(Array)
+          frameworks += _frameworks
+        else
+          frameworks.push(_frameworks)
+        end
+      end
+
     end
+
+    frameworks = frameworks.uniq
       
     podspec.attributes_hash["dependencies"] = dependencies_hash
+    podspec.attributes_hash["frameworks"] = frameworks
     
     podspec.subspecs = []
     podspec.attributes_hash.delete("default_subspecs")

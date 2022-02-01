@@ -11,7 +11,7 @@ import Foundation
 import AsyncDisplayKit
 #warning("✅")
 func run_AsyncDisplayKit() {
-  
+  ASVideoNode()
 }
 #endif
 
@@ -26,6 +26,13 @@ func run_JAYSON() {
 #if canImport(SSZipArchive)
 import SSZipArchive
 #warning("✅")
+#endif
+
+#if canImport(Alamofire)
+#warning("✅")
+func run_Alamofire() {
+  let j = Alamofire.Session()
+}
 #endif
 
 import Alamofire
