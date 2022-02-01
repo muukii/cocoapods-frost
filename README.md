@@ -2,6 +2,8 @@
 
 A plugin for [CocoaPods](https://cocoapods.org/) that creates XCFramework(for internal distribution) for speeding up build time.
 
+> 🚜 Still working on development, but partially works
+
 **Alternatives**
 - [coocapods-binary](https://github.com/leavez/cocoapods-binary)
 - [PodBuilder](https://github.com/Subito-it/PodBuilder)
