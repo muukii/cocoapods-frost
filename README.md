@@ -36,6 +36,8 @@ Managed in [issues](https://github.com/muukii/cocoapods-frost/issues)
   - For instance, `frost_pod 'Alamofire'` for `frost_pod 'Moya'`
 - Multiple specifying pods with `pod` and `frost_pod`
   - Do not use `pod` and `frost_pod` in different target. Please use either one.
+- Not inherited current install version in pod
+  - Specify install version (e.g. `pod 'some', "1.2.0"`)
 
 ## Attention
 
