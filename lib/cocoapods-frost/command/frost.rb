@@ -3,6 +3,8 @@ require_relative '../build.rb'
 require_relative '../shared_flags.rb'
 require 'fileutils'
 
+$DEFAULT_SWIFT_VERSION = "5"
+
 module Pod
   class Command
     class Frost < Command
@@ -18,6 +20,7 @@ module Pod
       # The entrypoint of this command
       def run
         $is_in_frost = true
+
         install
       end
 
@@ -43,8 +46,7 @@ Pods
         
         podfile = Pod::Podfile.from_file(File.join(config.project_root, "./Podfile"))
 
-        lockfile_path = File.join(config.project_root, "./FrostPodfile.lock")
-      
+        lockfile_path = File.join(config.project_root, "./FrostPodfile.lock")      
         lockfile = Pod::Lockfile.from_file(Pathname.new(lockfile_path))
 
         # Before install
@@ -58,9 +60,29 @@ Pods
         installer.podfile.installation_options.generate_multiple_pod_projects = false
         installer.podfile.installation_options.incremental_installation = false
 
-        installer.install!
+        # Install procedure manuall instead of using install!
+        # No validation.
 
-        installer.lockfile.write_to_disk(Pathname(lockfile_path))
+        installer.resolve_dependencies
+        
+        # Supports unknown swift-version pods
+        installer.pod_targets.filter(&:uses_swift?).each do |target|
+          if target.spec_swift_versions.empty?
+            ## Redfine method
+            ## For specifying swift-version in Pods project
+            def target.spec_swift_versions
+              [Pod::Version.new($DEFAULT_SWIFT_VERSION)]
+            end
+          end
+        end
+
+        installer.integrate
+
+        # for now, calling methods of install inside to prevent validating.
+        # Pod that no swift-version raises an error while validation
+        generated_lockfile = installer.send(:generate_lockfile)
+        
+        generated_lockfile.write_to_disk(Pathname(lockfile_path))
 
         # After install
 

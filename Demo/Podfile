@@ -9,13 +9,15 @@ install! "cocoapods",
          :generate_multiple_pod_projects => true,
          :incremental_installation => false
 
-
 target 'Demo' do
 
   frost_pod "Moya/Core"
   frost_pod "Texture/Core"
   frost_pod "Texture/Video"
   frost_pod "SVGKit"
+  frost_pod "AppVersionMonitor"
+
+  pod 'RealmSwift'
 
   break
   
@@ -55,12 +57,11 @@ target 'Demo' do
   
 end
 
-pre_install do |installer|
-  # p "hoge"
-  # installer.generated_projects.each do |project|
-  #   puts "hhh"
-  #   project.targets.each do |target|
-  #     config.build_settings['SWIFT_VERSION'] = '5.5'
-  #   end
-  # end
+post_install do |installer|
+  puts "Post"
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['SWIFT_VERSION'] = '5.0'
+     end
+   end
 end
