@@ -27,7 +27,7 @@ module Pod
             name = name.gsub(regex_for_subspec_specifier, "")
           end
 
-          pod(name, *args, path: "./Pods/Frost/out")
+          pod(name, *args, path: "./Pods/Frost/GeneratedPods/#{name}")
         end        
       end
 

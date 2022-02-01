@@ -1,16 +1,27 @@
 PODS:
-  - Texture (3.1.0)
+  - Alamofire (5.5.0)
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
+  - Texture/Core (3.1.0)
+  - Texture/Video (3.1.0):
+    - Texture/Core
 
 DEPENDENCIES:
-  - Texture (from `./Pods/Frost/out`)
+  - Moya/Core
+  - Texture/Core
+  - Texture/Video
 
-EXTERNAL SOURCES:
-  Texture:
-    :path: "./Pods/Frost/out"
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - Moya
+    - Texture
 
 SPEC CHECKSUMS:
-  Texture: 945dd91ec80b6e6711db75fcdeebef3e8d0bce0d
+  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  Texture: 2e8ab2519452515f7f5a520f5a8f7e0a413abfa3
 
-PODFILE CHECKSUM: d246bc6b6415ef9b494c735cecead00b0a2b2003
+PODFILE CHECKSUM: d8ec37a4a8857d7ae513c7a863424026e5ca5c36
 
 COCOAPODS: 1.11.2

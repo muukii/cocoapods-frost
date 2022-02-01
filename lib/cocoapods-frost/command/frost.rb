@@ -1,6 +1,7 @@
 
 require_relative '../build.rb'
 require_relative '../shared_flags.rb'
+require 'fileutils'
 
 module Pod
   class Command
@@ -36,7 +37,7 @@ module Pod
         # analyzer = Pod::Installer::Analyzer.new(sandbox, podfile)
         # p analyzer.analyze
 
-        lockfile_path = File.join(config.sandbox_root, "../Podfile.lock")
+        lockfile_path = File.join(config.sandbox_root, "./Podfile.lock")
       
         lockfile = Pod::Lockfile.from_file(Pathname.new(lockfile_path))
 
@@ -52,6 +53,8 @@ module Pod
         installer.podfile.installation_options.incremental_installation = false
 
         installer.install!
+
+        installer.lockfile.write_to_disk(Pathname(lockfile_path))
 
         # After install
 
@@ -71,13 +74,13 @@ module Pod
           puts "📦 Build #{target.name}"
          
           # For Debugging before building
-          # generate_podspec_for_xcframework(
-          #   target: target,
-          #   xcframework_path: ""
-          # )   
-
+          generate_podspec_for_xcframework(
+            target: target,
+            xcframework_path: ""
+          )  
+          
+          ## Build XCFramework
           configuration = "Release"
-
           xcframework_path = CocoapodsFrost.create_xcframewrok(
             output_directory: working_directory.join("./out"),
             build_directory: working_directory.join("./build"),
@@ -85,16 +88,30 @@ module Pod
             project_name: sandbox.project_path.realdirpath,
             scheme: target.label,
             configuration: configuration
-          )        
+          )    
 
+          ## Generated podspec.json
           podspec = generate_podspec_for_xcframework(
             target: target,
             xcframework_path: Pathname(xcframework_path).relative_path_from(working_directory.join("./out"))
-          )        
-        
-          podspec_path = working_directory.join("./out/#{podspec.name}.podspec.json")
-          File.write(podspec_path, podspec.to_pretty_json)
-          Pod::UI.puts "Created #{podspec_path}"
+          )    
+
+          ## Prepare directory
+          pod_directory = working_directory.join("./GeneratedPods/#{podspec.name}")          
+          FileUtils.mkdir_p(pod_directory)
+                  
+          ## Make a podspec file
+          File.write(pod_directory.join("#{podspec.name}.podspec.json"), podspec.to_pretty_json)
+         
+          ## Move XCFramework into the directory
+          FileUtils.mv(xcframework_path, pod_directory, force: true)  
+          
+          ## Copy license files  into the directory
+          target.file_accessors.each do |a|
+            FileUtils.cp(a.license, pod_directory)
+          end
+
+          Pod::UI.puts "Created #{pod_directory}"
 
         end
         
@@ -118,19 +135,22 @@ def generate_podspec_for_xcframework(target:, xcframework_path:)
   else
 
     ## Finds depedencies by specified subspecs
-    gathered_dependencies = podspec
+    using_subspecs = podspec
       .subspecs
       .filter { |s| 
-        target.library_specs
-          .filter { |l| l.name.start_with?(podspec.name) == false }
+        target.library_specs          
           .any? { |l| l.name == s.name }
       }
 
     ## Merge into one hash from all of dependencies
     dependencies_hash = podspec.attributes_hash["dependencies"] || {}
 
-    gathered_dependencies.each do |spec|      
-      dependencies_hash = dependencies_hash.merge(spec.attributes_hash["dependencies"] || {})
+    using_subspecs.each do |spec|      
+      dependencies = spec.attributes_hash["dependencies"] || {}
+      dependencies.delete_if { |key, _| 
+        key.start_with?(podspec.name)
+      }
+      dependencies_hash = dependencies_hash.merge(dependencies)
     end
       
     podspec.attributes_hash["dependencies"] = dependencies_hash

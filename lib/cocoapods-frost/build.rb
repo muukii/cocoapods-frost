@@ -91,6 +91,10 @@ module CocoapodsFrost
 
     args.push("-output #{output}")
 
+    if File.exist?(output)
+      FileUtils.rm_rf(output)
+    end
+
     command = "xcodebuild -create-xcframework -allow-internal-distribution #{args.join(" \\\n")}"
 
     # puts command
