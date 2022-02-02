@@ -14,8 +14,22 @@ module Pod
       # `config`
       include Pod::Config::Mixin
 
-      self.summary = "Hello"
+      self.summary = "Frost is a plugin for CocoaPods that creates XCFramework(for internal distribution) for speeding up build time."
 
+      def self.options
+        [
+          # ["--sources=#{Pod::TrunkSource::TRUNK_REPO_URL}", 'The sources from which to update dependent pods. ' \
+          #  'Multiple sources must be comma-delimited'],
+          ['--update-pods=podName', 'Pods to exclude during update. Multiple pods must be comma-delimited'],
+          # ['--clean-install', 'Ignore the contents of the project cache and force a full pod installation. This only ' \
+          #  'applies to projects that have enabled incremental installation'],
+        ].concat(super)
+      end
+
+      def initialize(argv)
+        @pods_to_update = argv.option('update-pods', '').split(',')
+        super
+      end
       ##
       # The entrypoint of this command
       def run
@@ -53,7 +67,11 @@ Pods
 
         installer = Installer.new(sandbox, podfile, lockfile)
 
-        installer.repo_update = false
+        installer.repo_update = @pods_to_update.any?
+        installer.update = {
+          :pods => @pods_to_update
+        }
+
         installer.podfile.installation_options.integrate_targets = false
         installer.podfile.installation_options.warn_for_multiple_pod_sources = false
         installer.podfile.installation_options.deterministic_uuids = false

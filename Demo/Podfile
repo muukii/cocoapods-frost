@@ -11,18 +11,48 @@ install! "cocoapods",
 
 target 'Demo' do
 
-  frost_pod "Moya/Core"
-  frost_pod "Texture/Core"
-  frost_pod "Texture/Video"
-  # frost_pod "SVGKit"
-  frost_pod "AppVersionMonitor"
+  # frost_pod "Moya/Core"
+  # frost_pod "Texture/Core"
+  # frost_pod "Texture/Video"
+  # frost_pod "AppVersionMonitor"
 
-  pod "Advance", git: "git@github.com:timdonnelly/Advance.git", branch: "master"
+  # pod "Advance", git: "git@github.com:timdonnelly/Advance.git", branch: "master"
 
-  pod 'RealmSwift'
-  frost_pod "ImageScrollView", ">= 1.8"
+  frost_pod "RxSwift"
+
+  # pod 'RealmSwift'
+  # frost_pod "ImageScrollView", ">= 1.8"
+  # frost_pod "SwiftDate"
+  # frost_pod "SSZipArchive"
+  # frost_pod "gRPC-Swift", ">=1.4.2"
+  # frost_pod "CGRPCZlib"
+  # frost_pod "Logging"
+  # frost_pod "SwiftNIO"
+  # frost_pod "SwiftNIOCore"
+  # frost_pod "SwiftNIOConcurrencyHelpers"
+  # frost_pod "CNIOAtomics"
+  # frost_pod "CNIOLinux"
+  # frost_pod "SwiftNIOEmbedded"
+  # frost_pod "_NIODataStructures"
+  # frost_pod "SwiftNIOPosix"
+  # frost_pod "CNIODarwin"
+  # frost_pod "CNIOWindows"
+  # frost_pod "SwiftNIOExtras"
+  # frost_pod "SwiftNIOHTTP2"
+  # frost_pod "SwiftNIOHPACK"
+  # frost_pod "SwiftNIOHTTP1"
+  # frost_pod "CNIOHTTPParser"
+  # frost_pod "SwiftNIOTLS"
+  # frost_pod "SwiftNIOSSL"
+  # frost_pod "CNIOBoringSSL"
+  # frost_pod "CNIOBoringSSLShims"
+  # frost_pod "SwiftNIOTransportServices"
+  # frost_pod "SwiftNIOFoundationCompat"
+  # frost_pod "SwiftProtobuf"
 
   break
+
+  # frost_pod "SVGKit"
   
   # frost_pod "Texture/Core"  
   # frost_pod "Texture/Video"
@@ -33,10 +63,7 @@ target 'Demo' do
 
   pod "FBSDKCoreKit"
   pod "FBSDKLoginKit"
-
-  frost_pod "SSZipArchive"
-  
-  frost_pod "SwiftDate"
+    
   frost_pod "RxSwift"
   frost_pod "RxCocoa"
   frost_pod "RxRelay"
@@ -53,8 +80,6 @@ target 'Demo' do
   # pod "FirebaseUI/OAuth"
   # pod "Firebase/Crashlytics"
   # pod "Firebase/Analytics"
-
-  # pod "gRPC-Swift", ">=1.4.2"
   
   frost_pod "MagazineLayout"
   

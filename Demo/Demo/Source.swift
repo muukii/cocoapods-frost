@@ -35,8 +35,9 @@ func run_Alamofire() {
 }
 #endif
 
-import Alamofire
+#if canImport(Moya)
 import Moya
+#endif
 //import RxSwift
 
 
