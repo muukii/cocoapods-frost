@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.5.0'
 
   spec.add_dependency 'cocoapods', '>= 1.10', '< 2.0'
+  spec.add_dependency 'concurrent-ruby'
 
   spec.add_development_dependency 'bundler', '~> 2.0'
 end

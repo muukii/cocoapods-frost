@@ -2,6 +2,7 @@
 require_relative '../build.rb'
 require_relative '../shared_flags.rb'
 require 'fileutils'
+require 'concurrent'
 
 $DEFAULT_SWIFT_VERSION = "5"
 
@@ -118,15 +119,22 @@ Pods
         
         FileUtils.rm_rf(working_directory.join("GeneratedPods"))
 
-        targets.select { |t| t.should_build? }.each do |target|        
-          build(
-            working_directory: working_directory,
-            xcodeproject_path: sandbox.project_path.realdirpath,
-            target: target
-          )
-        end
+        tasks = targets.select { |t| t.should_build? }.map { |target|        
+          Concurrent::Promises.delay {
+            build(
+              working_directory: working_directory,
+              xcodeproject_path: sandbox.project_path.realdirpath,
+              target: target
+            )
+          }                    
+        }
+
+        Pod::UI.puts "🚜 Start building..."
+
+        # TODO: throttle number of threads
+        Concurrent::Promises.zip(*tasks).value!
         
-        Pod::UI.puts "✅ Frost completed"
+        Pod::UI.puts "🚀 Frost completed"
         Pod::UI.puts "Next: pod install"
 
       end
@@ -142,7 +150,6 @@ def build(
 )
 
   logs = []
-  logs.push("📦 Build #{target.name}")
          
   # For Debugging before building
   generate_podspec_for_xcframework(
@@ -158,6 +165,9 @@ def build(
           
   ## Build XCFramework
   configuration = "Release"
+
+  build_logs = []
+
   xcframework_path = CocoapodsFrost.create_xcframewrok(
     output_directory: pod_directory,
     build_directory: working_directory.join("./build"),
@@ -165,7 +175,7 @@ def build(
     project_name: xcodeproject_path,
     scheme: target.label,
     configuration: configuration,
-    logs: logs
+    logs: build_logs
   )    
 
   ## Generated podspec.json
@@ -187,7 +197,7 @@ def build(
 
   logs.push("Created #{pod_directory}")
 
-  Pod::UI.puts logs.join("\n")
+  Pod::UI.puts "#{logs.join("\n")}\n#{build_logs.map { |s| "  #{s}"}.join("\n")}"
 
 end
 

@@ -3,6 +3,7 @@ PATH
   specs:
     cocoapods-frost (1.0.0)
       cocoapods (>= 1.10, < 2.0)
+      concurrent-ruby
 
 GEM
   remote: https://rubygems.org/
