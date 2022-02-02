@@ -29,7 +29,6 @@ module CocoapodsFrost
     archive_path_ios = File.join(build_directory, "#{module_name}/ios.xcarchive")
     archive_path_ios_simulator = File.join(build_directory, "#{module_name}/ios-simulator.xcarchive")
 
-    logs.push "  Build for iOS"
     xcodebuild(
       projectName: project_name,
       scheme: scheme,
@@ -40,9 +39,8 @@ module CocoapodsFrost
       derivedDataPath: File.join(build_directory, "#{module_name}"),
       otherOptions: options
     )
-    logs.push "    Completed for iOS"
+    logs.push "[iOS] Build succeeded"
 
-    logs.push "  Build for iOS Simulator"
     xcodebuild(
       projectName: project_name,
       scheme: scheme,
@@ -53,11 +51,9 @@ module CocoapodsFrost
       derivedDataPath: File.join(build_directory, "#{module_name}"),
       otherOptions: options
     )
-    logs.push "    Completed for iOS Simulator"
+    logs.push "[iOS Simulator] Build succeeded"
 
     # https://github.com/madsolar8582/SLRNetworkMonitor/blob/e415fc6399aa164ab8b147a6476630b2418d1d75/release.sh#L73
-
-    logs.push "  Create for iOS Simulator"
   
     args = []
 
@@ -104,10 +100,10 @@ module CocoapodsFrost
     log = `#{command}`
   
     if File.exist? output
-      logs.push "🚜 #{module_name} -> ✅ Success #{output}\n"
-    else
+      logs.push "✅ Making XCFramework succeeded: #{output}\n"
+    else      
+      logs.push "❌ Making XCFramework failed\n"
       logs.push log
-      logs.push "🚜 #{module_name} -> ❌ Failue\n"
     end
 
     output
