@@ -211,8 +211,8 @@ def build(
   File.write(pod_directory.join("#{podspec.name}.podspec.json"), podspec.to_pretty_json)
           
   ## Copy license files  into the directory
-  target.file_accessors.each do |a|
-    FileUtils.cp(a.license, pod_directory)
+  target.file_accessors.each do |a|    
+    FileUtils.cp(a.license, pod_directory) if File.exist?(a.license)
   end
 
   logs.push("Created #{pod_directory}")
