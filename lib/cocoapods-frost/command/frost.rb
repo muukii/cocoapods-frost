@@ -88,22 +88,20 @@ Pods
 
         # After install
 
-        targets = installer.pod_targets
-
-        Pod::UI.puts "Target pods to create xcramework"
         $target_names = $target_names.uniq
-        $target_names.each do |name|
-          Pod::UI.puts "  - 📦 #{name}"
-        end
 
+        targets = installer
+          .pod_targets
+          .select { |target|
+            $target_names.any? { |name| name.start_with?(target.name) }
+          }  
+          
+        log_targets(targets, $target_names)
+        
         FileUtils.rm_rf(working_directory.join("GeneratedPods"))
 
         targets.each do |target|
-
-          unless $target_names.any? { |name| name.start_with?(target.name) }
-            next
-          end
-
+        
           puts "📦 Build #{target.name}"
          
           # For Debugging before building
@@ -216,4 +214,36 @@ def generate_podspec_for_xcframework(target:, xcframework_path:)
   end
 
   return podspec
+end
+
+def log_targets(targets, target_names)
+  Pod::UI.puts "Target pods to create xcramework"
+  targets.each { |t|
+
+    dependencies = []
+              
+    def print_pods(array, pod)
+      array.push(pod.name)           
+      pod.dependent_targets.each { |d|
+        print_pods(array, d)
+      }
+    end
+
+    t.dependent_targets.each { |d|
+      print_pods(dependencies, d)
+    }
+  
+    dependencies = dependencies.uniq
+
+    Pod::UI.puts "📦 #{t.name}"
+    Pod::UI.puts dependencies
+      .map { |d|
+        if target_names.any? { |name| name.start_with?(d) } 
+          "  📦 #{d}"
+        else
+          "  🗞 #{d}"
+        end
+      }
+      .join("\n")
+  }
 end
