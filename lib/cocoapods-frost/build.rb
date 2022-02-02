@@ -8,9 +8,11 @@ module CocoapodsFrost
     module_name:,
     project_name:,
     scheme:,
-    configuration:
+    configuration:,
+    logs:
   )
-    Pod::UI.puts "🚜 #{module_name} -> #{configuration} Building into #{output_directory}"
+    
+    logs.push "🚜 #{module_name} -> #{configuration} Building into #{output_directory}"
 
     options = []
 
@@ -27,7 +29,7 @@ module CocoapodsFrost
     archive_path_ios = File.join(build_directory, "#{module_name}/ios.xcarchive")
     archive_path_ios_simulator = File.join(build_directory, "#{module_name}/ios-simulator.xcarchive")
 
-    Pod::UI.puts "  Build for iOS"
+    logs.push "  Build for iOS"
     xcodebuild(
       projectName: project_name,
       scheme: scheme,
@@ -38,9 +40,9 @@ module CocoapodsFrost
       derivedDataPath: File.join(build_directory, "#{module_name}"),
       otherOptions: options
     )
-    Pod::UI.puts "    Completed for iOS"
+    logs.push "    Completed for iOS"
 
-    Pod::UI.puts "  Build for iOS Simulator"
+    logs.push "  Build for iOS Simulator"
     xcodebuild(
       projectName: project_name,
       scheme: scheme,
@@ -51,11 +53,11 @@ module CocoapodsFrost
       derivedDataPath: File.join(build_directory, "#{module_name}"),
       otherOptions: options
     )
-    Pod::UI.puts "    Completed for iOS Simulator"
+    logs.push "    Completed for iOS Simulator"
 
     # https://github.com/madsolar8582/SLRNetworkMonitor/blob/e415fc6399aa164ab8b147a6476630b2418d1d75/release.sh#L73
 
-    Pod::UI.puts "  Create for iOS Simulator"
+    logs.push "  Create for iOS Simulator"
   
     args = []
 
@@ -100,13 +102,12 @@ module CocoapodsFrost
     # puts command
 
     log = `#{command}`
-
-    Pod::UI.puts log
-
+  
     if File.exist? output
-      Pod::UI.puts "🚜 #{module_name} -> ✅ Success #{output}\n"
+      logs.push "🚜 #{module_name} -> ✅ Success #{output}\n"
     else
-      Pod::UI.puts "🚜 #{module_name} -> ❌ Failue\n"
+      logs.push log
+      logs.push "🚜 #{module_name} -> ❌ Failue\n"
     end
 
     output

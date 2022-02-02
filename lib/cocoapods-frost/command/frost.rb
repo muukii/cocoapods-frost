@@ -140,7 +140,9 @@ def build(
   xcodeproject_path:,
   target:
 )
-  puts "📦 Build #{target.name}"
+
+  logs = []
+  logs.push("📦 Build #{target.name}")
          
   # For Debugging before building
   generate_podspec_for_xcframework(
@@ -162,7 +164,8 @@ def build(
     module_name: target.product_module_name,
     project_name: xcodeproject_path,
     scheme: target.label,
-    configuration: configuration
+    configuration: configuration,
+    logs: logs
   )    
 
   ## Generated podspec.json
@@ -182,7 +185,10 @@ def build(
     FileUtils.cp(a.license, pod_directory)
   end
 
-  Pod::UI.puts "Created #{pod_directory}"
+  logs.push("Created #{pod_directory}")
+
+  Pod::UI.puts logs.join("\n")
+
 end
 
 # Returns attributes for podspec
