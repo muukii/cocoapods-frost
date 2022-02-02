@@ -137,8 +137,10 @@ Pods
         
         FileUtils.rm_rf(working_directory.join("GeneratedPods"))
 
+        pool = Concurrent::FixedThreadPool.new(4)
+
         tasks = targets.select { |t| t.should_build? }.map { |target|        
-          Concurrent::Promises.delay {
+          Concurrent::Promises.delay_on(pool) {
             build(
               working_directory: working_directory,
               xcodeproject_path: sandbox.project_path.realdirpath,
