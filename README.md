@@ -28,6 +28,7 @@ If you are interested in this project or you need
 
 Managed in [issues](https://github.com/muukii/cocoapods-frost/issues)
 
+- Supports only iOS currently
 - some pods fails build
   - especially, already provided as framework
   - if you found such pod, please report it from [issues](https://github.com/muukii/cocoapods-frost/issues)
