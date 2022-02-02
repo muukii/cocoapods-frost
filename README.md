@@ -44,6 +44,7 @@ Managed in [issues](https://github.com/muukii/cocoapods-frost/issues)
 ## Attention
 
 - Should build all of targets when pod updated - partially building might causes linking error (compile-time or dynamic-linking-time)
+  - Future updates, completely isolated pods can be build partially. 
 
 ## How it works
 
