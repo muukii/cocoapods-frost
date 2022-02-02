@@ -49,6 +49,7 @@ module Pod
 
         gitignore_path = working_directory.join(".gitignore")
 
+        # makes .gitignore file in FrostPods
         unless gitignore_path.exist?
           File.write(gitignore_path, %{
 build
@@ -113,7 +114,24 @@ Pods
           .pod_targets          
           .select { |target|
             $target_names.any? { |name| name.start_with?(target.name) }
-          }  
+          } 
+          
+        # validate
+        targets.each { |target| 
+
+          hasBundle = !target.resource_paths.filter { |key, value| !value.empty? }.empty?
+
+          # if hasBundle
+          #   puts "#{pod.name} has bundle"
+          #   pod.resource_paths.each { |key, value|
+          #     puts "  #{value}"
+          #   }
+          # end
+
+          if hasBundle 
+            raise "[#{target.name}] Currently not supported building pod which includes resources."
+          end
+        }
           
         log_targets(targets, $target_names)
         
