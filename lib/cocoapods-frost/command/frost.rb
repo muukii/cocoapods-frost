@@ -109,7 +109,7 @@ Pods
         $target_names = $target_names.uniq
 
         targets = installer
-          .pod_targets
+          .pod_targets          
           .select { |target|
             $target_names.any? { |name| name.start_with?(target.name) }
           }  
@@ -118,52 +118,12 @@ Pods
         
         FileUtils.rm_rf(working_directory.join("GeneratedPods"))
 
-        targets.each do |target|
-        
-          puts "📦 Build #{target.name}"
-         
-          # For Debugging before building
-          generate_podspec_for_xcframework(
-            target: target,
-            xcframework_path: ""
-          )  
-
-          ## Prepare directory     
-          pod_directory = working_directory.join("./GeneratedPods/#{target.root_spec.name}")   
-                                         
-          FileUtils.rm_rf(pod_directory)
-          FileUtils.mkdir_p(pod_directory)
-                  
-          ## Build XCFramework
-          configuration = "Release"
-          xcframework_path = CocoapodsFrost.create_xcframewrok(
-            output_directory: pod_directory,
-            build_directory: working_directory.join("./build"),
-            module_name: target.product_module_name,
-            project_name: sandbox.project_path.realdirpath,
-            scheme: target.label,
-            configuration: configuration
-          )    
-        
-          ## Generated podspec.json
-          podspec = generate_podspec_for_xcframework(
-            target: target,
-            xcframework_path: Pathname(xcframework_path).relative_path_from(pod_directory)
-          )                          
-
-          ## Make a original podspec file
-          File.write(pod_directory.join("original-podspec-#{target.name}.json"), target.root_spec.to_pretty_json)
-                                    
-          ## Make a podspec file
-          File.write(pod_directory.join("#{podspec.name}.podspec.json"), podspec.to_pretty_json)
-                  
-          ## Copy license files  into the directory
-          target.file_accessors.each do |a|
-            FileUtils.cp(a.license, pod_directory)
-          end
-
-          Pod::UI.puts "Created #{pod_directory}"
-
+        targets.select { |t| t.should_build? }.each do |target|        
+          build(
+            working_directory: working_directory,
+            xcodeproject_path: sandbox.project_path.realdirpath,
+            target: target
+          )
         end
         
         Pod::UI.puts "✅ Frost completed"
@@ -173,6 +133,56 @@ Pods
 
     end
   end
+end
+
+def build(
+  working_directory:,
+  xcodeproject_path:,
+  target:
+)
+  puts "📦 Build #{target.name}"
+         
+  # For Debugging before building
+  generate_podspec_for_xcframework(
+    target: target,
+    xcframework_path: ""
+  )  
+
+  ## Prepare directory     
+  pod_directory = working_directory.join("./GeneratedPods/#{target.root_spec.name}")   
+                                  
+  FileUtils.rm_rf(pod_directory)
+  FileUtils.mkdir_p(pod_directory)
+          
+  ## Build XCFramework
+  configuration = "Release"
+  xcframework_path = CocoapodsFrost.create_xcframewrok(
+    output_directory: pod_directory,
+    build_directory: working_directory.join("./build"),
+    module_name: target.product_module_name,
+    project_name: xcodeproject_path,
+    scheme: target.label,
+    configuration: configuration
+  )    
+
+  ## Generated podspec.json
+  podspec = generate_podspec_for_xcframework(
+    target: target,
+    xcframework_path: Pathname(xcframework_path).relative_path_from(pod_directory)
+  )                          
+
+  ## Make a original podspec file
+  File.write(pod_directory.join("original-podspec-#{target.name}.json"), target.root_spec.to_pretty_json)
+                            
+  ## Make a podspec file
+  File.write(pod_directory.join("#{podspec.name}.podspec.json"), podspec.to_pretty_json)
+          
+  ## Copy license files  into the directory
+  target.file_accessors.each do |a|
+    FileUtils.cp(a.license, pod_directory)
+  end
+
+  Pod::UI.puts "Created #{pod_directory}"
 end
 
 # Returns attributes for podspec
@@ -235,7 +245,8 @@ def generate_podspec_for_xcframework(target:, xcframework_path:)
 end
 
 def log_targets(targets, target_names)
-  Pod::UI.puts "Target pods to create xcramework"
+  Pod::UI.puts "Target graph to create xcramework."
+  Pod::UI.puts "🗞 means building from source. specify `frost_pod <name>` to create xcframework"
   targets.each { |t|
 
     dependencies = []
@@ -253,7 +264,11 @@ def log_targets(targets, target_names)
   
     dependencies = dependencies.uniq
 
-    Pod::UI.puts "📦 #{t.name}"
+    if t.should_build?
+      Pod::UI.puts "📦 #{t.name}"
+    else
+      Pod::UI.puts "🎯 #{t.name} (this is an aggregate target, not to build)"
+    end    
     Pod::UI.puts dependencies
       .map { |d|
         if target_names.any? { |name| name.start_with?(d) } 

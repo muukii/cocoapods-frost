@@ -20,6 +20,39 @@ target 'Demo' do
 
   frost_pod "RxSwift"
 
+  frost_pod "Firebase/Core"
+  frost_pod "Firebase/Performance"
+  frost_pod "Firebase/Messaging"
+  frost_pod "Firebase/InAppMessaging"
+  frost_pod "Firebase/Auth"
+  frost_pod "FirebaseUI/Phone"
+  frost_pod "FirebaseUI/OAuth"
+  frost_pod "Firebase/Crashlytics"
+  frost_pod "Firebase/Analytics"
+
+  frost_pod "FirebaseAuth"
+  frost_pod "FirebaseCore"
+  frost_pod "GoogleUtilities"
+  frost_pod "PromisesObjC"
+  frost_pod "FirebaseCoreDiagnostics"
+  frost_pod "GoogleDataTransport"
+  frost_pod "nanopb"
+  frost_pod "GTMSessionFetcher"
+  frost_pod "FirebaseAnalytics"
+  frost_pod "FirebaseInstallations"
+  frost_pod "GoogleAppMeasurement"
+  frost_pod "FirebaseCrashlytics"
+  frost_pod "FirebaseInAppMessaging", "8.11.0-beta"
+  frost_pod "FirebaseABTesting"
+  frost_pod "FirebaseMessaging"
+  frost_pod "FirebasePerformance"
+  frost_pod "FirebaseRemoteConfig"
+
+  frost_pod "FirebaseOAuthUI"
+  frost_pod "FirebaseAuthUI"
+  frost_pod "FirebasePhoneAuthUI"
+
+
   # pod 'RealmSwift'
   # frost_pod "ImageScrollView", ">= 1.8"
   # frost_pod "SwiftDate"
@@ -71,16 +104,7 @@ target 'Demo' do
   frost_pod "lottie-ios"
 
   # pod "Verge"
-  # pod "Firebase/Core"
-  # pod "Firebase/Performance"
-  # pod "Firebase/Messaging"
-  # pod "Firebase/InAppMessaging"
-  # pod "Firebase/Auth"
-  # pod "FirebaseUI/Phone"
-  # pod "FirebaseUI/OAuth"
-  # pod "Firebase/Crashlytics"
-  # pod "Firebase/Analytics"
-  
+   
   frost_pod "MagazineLayout"
   
 end
