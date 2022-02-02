@@ -51,7 +51,7 @@ Managed in [issues](https://github.com/muukii/cocoapods-frost/issues)
 - Generates a `podspec.json` that installs XCFramework as `vendored_frameworks`
 - `frost_pod` uses that generated podspec as a local pod. which installs XCFramework instead of sources.
 
-## Usage
+## Making XCFrameworks
 
 Make bundler installs `cocoapods-frost`
 
@@ -88,6 +88,14 @@ Then
 
 ```sh
 $ bundle exec pod install
+```
+
+## Updating pods
+
+Use `--update-pods` to update pods
+
+```shell
+$ bundle exec pod frost --update-pods=RxSwift
 ```
 
 ## Directory structure
