@@ -212,7 +212,7 @@ def build(
           
   ## Copy license files  into the directory
   target.file_accessors.each do |a|    
-    FileUtils.cp(a.license, pod_directory) if File.exist?(a.license)
+    FileUtils.cp(a.license, pod_directory) if a.license.nil? == false && File.exist?(a.license)
   end
 
   logs.push("Created #{pod_directory}")
